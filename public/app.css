@@ -1,0 +1,13 @@
+.comment{
+    width: 80%;
+}
+.btn-post{
+    width: 9%;
+}
+.comments{
+    max-height: 300px;
+    overflow-y: auto;
+    height:300px;
+}
+
+
