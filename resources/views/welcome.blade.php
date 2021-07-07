@@ -13,11 +13,25 @@
         <a href="/post/{{$post->id}}"><img class="card-img-top" src="{{$post->photo}}" width="60px"  alt="Card image cap"></a>
         <div class="card-body">
             <div class="d-flex">
-                <a href="like/{{$post->id}}" class="text-dark"><i class="far fa-heart fa-2x p-2"></i></a>
+                <?php $count = 0 ?>
+                @foreach ($post->like as $like)
+                    @if($like->user_id == Auth::user()->id && $post->id == $like->post_id)
+                    <?php $count =1; ?>    
+                    <a href="like/{{$post->id}}" class="text-danger"><i class="fas fa-heart fa-2x p-2"></i></a>
+                    @endif
+                @endforeach
+                @if ($count != 1)
+                    <a href="like/{{$post->id}}" class="text-dark"><i class="far fa-heart fa-2x p-2"></i></a>
+                @endif
                 <a href="post/{{$post->id}}" class="text-dark"><i class="far fa-comment fa-2x p-2"></i></a>
             </div>
             <b>{{count($post->like)}} like</b>
-            <p class="card-text">{{$post->description}}</p>
+            <p class="card-text">{{$post->description}}</p><hr>
+            @foreach ($post->comment->take(2) as $comment)
+                <div class="d-inline">
+                    <p><b>{{$comment->user->username}}: </b> {{$comment->comment}}</p>
+                </div>
+            @endforeach
             @if (Auth::check('login'))
             <form action="/comment" method="POST">
                 @csrf

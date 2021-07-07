@@ -157,17 +157,18 @@ class HomeController extends Controller
         }else{
             foreach($likes as $like){
                 if( $like->post_id == $id && $like->user_id == auth()->user()->id){
-                    $posts = Post::all();
-                    return redirect('/')->with(['posts'=>$posts]);
-                }else{
-                    Like::create([
-                        'user_id' => auth()->user()->id,
-                        'post_id' => $id
-                    ]);
+                    Like::where('post_id', $id)->where('user_id',auth()->user()->id)->delete();
                     $posts = Post::all();
                     return redirect('/')->with(['posts'=>$posts]);
                 }
             }
+
+            Like::create([
+                'user_id' => auth()->user()->id,
+                'post_id' => $id
+            ]);
+            $posts = Post::all();
+            return redirect('/')->with(['posts'=>$posts]);
            
         }
         

@@ -16,7 +16,7 @@
             <a href="/"><img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt=""></a>
             <form action="/logout" method="POST">
                 @csrf
-                <button type="submit">logout</button>
+                <button class="btn btn-none" type="submit">logout</button>
             </form>
         </div>
     </nav>

@@ -11,8 +11,8 @@
     crossorigin="anonymous" />
     <title>Instagram</title>
 </head>
-<body style="background-color: rgb(214, 212, 212)">
-    <nav class="navbar  bg-light mb-1 rounded fixed-top navbar-light" style="position: relative">
+<body >
+    <nav class="navbar  bg-light mb-1 rounded fixed-top navbar-light" style="position: relative;border-bottom:1px solid #ababab">
         <div class="container">
             <a href="/"><img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt=""></a>
             @if (Auth::check('login'))

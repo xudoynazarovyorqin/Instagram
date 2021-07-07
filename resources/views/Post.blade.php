@@ -3,10 +3,24 @@
 
     <a href="/" type="submit" class="btn btn-none my-2">back</a>
     <div class="d-flex">
-        <div class="d-inline" >
-            <img src="{{$post->photo}}" width="50%" alt="">
+        <div class="d-inline" style="width: 60%">
+            <img src="{{$post->photo}}" width="100%" alt="">
+            <?php $count = 0 ?>
+                @foreach ($post->like as $like)
+                    @if($like->user_id == Auth::user()->id && $post->id == $like->post_id)
+                    <?php $count =1; ?>    
+                    <a href="../like/{{$post->id}}" class="text-danger"><i class="fas fa-heart fa-2x p-2"></i></a>
+                    @endif
+                @endforeach
+                @if ($count != 1)
+                    <a href="../like/{{$post->id}}" class="text-dark"><i class="far fa-heart fa-2x p-2"></i></a>
+                @endif
+                <a href="post/{{$post->id}}" class="text-dark"><i class="far fa-comment fa-2x p-2"></i></a>
+            <b style="display: block">{{count($post->like)}} like</b>
+
+            <p>{{$post->description}}</p>
         </div>
-        <div class="d-inline ">
+        <div class="d-inline " style="margin-left: 4rem">
             <div class="comments">
                 @foreach ($comments as $comment)
                     @foreach ($comment->user->profile as $item)
